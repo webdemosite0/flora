@@ -2,6 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { FloraImage } from './FloraImage'
 import { useReducedMotion } from '../../lib/hooks'
 
+/**
+ * Vite rewrites asset URLs it can see, but not absolute paths living in
+ * strings — so /videos/x.mp4 would 404 wherever the site is served from a
+ * sub-path. Every clip is resolved against the deploy base here instead.
+ */
+const resolve = (src: string) =>
+  src.startsWith('/') ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${src}` : src
+
 interface Props {
   /** Path under /public/videos. Missing files fall back to the poster image. */
   src?: string
@@ -69,7 +77,7 @@ export function FloraVideo({ src, poster, alt, className = '', lazy = true }: Pr
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
-          src={src}
+          src={resolve(src!)}
           autoPlay
           muted
           loop
