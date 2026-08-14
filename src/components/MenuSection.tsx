@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import { categories, menu } from '../data/menu'
 import type { Category } from '../data/types'
 import { CoffeeCard } from './CoffeeCard'
+import { MenuRow } from './MenuRow'
 import { SectionHeading } from './ui/SectionHeading'
 
 export function MenuSection() {
@@ -30,10 +31,12 @@ export function MenuSection() {
 
         {/* Filters */}
         <LayoutGroup id="menu-filter">
+          {/* Sticky on phones: with a long list you should never have to scroll
+              back up to change category. Static from sm: up, as before. */}
           <div
             role="tablist"
             aria-label="Menu categories"
-            className="no-scrollbar mx-auto mt-12 flex max-w-full snap-x gap-2 overflow-x-auto pb-2 sm:justify-center"
+            className="no-scrollbar sticky top-14 z-20 -mx-5 mt-12 flex max-w-full snap-x gap-2 overflow-x-auto bg-beige/95 px-5 py-3 backdrop-blur-sm sm:static sm:mx-auto sm:justify-center sm:bg-transparent sm:px-0 sm:pt-0 sm:pb-2 sm:backdrop-blur-none"
           >
             {categories.map((c) => {
               const selected = active === c.id
@@ -61,10 +64,18 @@ export function MenuSection() {
           </div>
         </LayoutGroup>
 
-        {/* Results */}
+        {/* Results — a printed-menu list on phones, cards from sm: up */}
+        <motion.ul layout className="mt-10 divide-y divide-forest/10 sm:hidden">
+          <AnimatePresence mode="popLayout">
+            {items.map((item, i) => (
+              <MenuRow key={item.id} item={item} index={i} />
+            ))}
+          </AnimatePresence>
+        </motion.ul>
+
         <motion.div
           layout
-          className="mt-14 grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-14 hidden gap-x-7 gap-y-12 sm:grid sm:grid-cols-2 lg:grid-cols-4"
         >
           <AnimatePresence mode="popLayout">
             {items.map((item, i) => (

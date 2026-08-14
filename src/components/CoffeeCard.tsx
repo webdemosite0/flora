@@ -27,9 +27,11 @@ export function CoffeeCard({ item, index = 0, compact = false }: Props) {
       transition={{ duration: 0.65, delay: Math.min(index * 0.06, 0.36), ease: [0.22, 1, 0.36, 1] }}
       className="group relative flex flex-col"
     >
-      <button
+      {/* Touch has no hover, so the press itself has to give the feedback. */}
+      <motion.button
         type="button"
         onClick={() => setProduct(item)}
+        whileTap={{ scale: 0.985 }}
         data-cursor="view"
         className="flex w-full flex-col text-left"
         aria-label={`${item.name} — ${currency(item.price)}. View details`}
@@ -87,7 +89,7 @@ export function CoffeeCard({ item, index = 0, compact = false }: Props) {
             {item.description}
           </p>
         </div>
-      </button>
+      </motion.button>
     </motion.article>
   )
 }

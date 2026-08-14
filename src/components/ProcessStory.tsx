@@ -29,8 +29,10 @@ function StepCard({
   return (
     <article className={horizontal ? 'flex w-[30vw] shrink-0 flex-col' : 'flex w-full flex-col'}>
       <div
+        /* Six 4:5 frames stacked ran to nearly five screens on a phone, so the
+           media is let-boxed there and returns to a portrait crop from sm: up. */
         className={`relative overflow-hidden rounded-lg bg-pine ${
-          horizontal ? 'h-[38vh] w-full' : 'aspect-4/5'
+          horizontal ? 'h-[38vh] w-full' : 'aspect-16/10 sm:aspect-4/5'
         }`}
       >
         {/* The media drifts against the track, which reads as depth. */}
@@ -140,7 +142,7 @@ export function ProcessStory() {
         <div className="mx-auto max-w-[1500px] px-5 sm:px-8">
           <div id="journey-title">{heading}</div>
 
-          <ol className="relative mt-14 grid gap-12 sm:grid-cols-2">
+          <ol className="relative mt-14 grid gap-8 sm:grid-cols-2 sm:gap-12">
             {journey.map((s, i) => (
               <li key={s.n} className="relative">
                 {/* Spine + node, drawn as the step enters view. */}

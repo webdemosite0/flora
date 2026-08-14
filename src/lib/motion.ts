@@ -65,3 +65,33 @@ export const drawLine: Variants = {
 
 /** Viewport trigger used by nearly every section. */
 export const inView = { once: true, amount: 0.25 } as const
+
+/**
+ * Motion is retuned for touch, where the desktop settings work against you:
+ * a thumb-flick scrolls far faster than a wheel, so long slow entrances arrive
+ * after the content has already been read, and a late trigger leaves a screen
+ * of blanks mid-scroll. Phones move less, faster, and start sooner.
+ *
+ * Desktop values are the originals — this hook must not change that experience.
+ */
+/** These are the original hard-coded values — desktop must not shift. */
+export const DESKTOP_PROFILE = {
+  distance: 34,
+  duration: 0.8,
+  wordDuration: 0.85,
+  stagger: 0.07,
+  amount: 0.25,
+  /** Filter animation is expensive on mobile GPUs; allowed on desktop. */
+  allowBlur: true,
+} as const
+
+export const MOBILE_PROFILE = {
+  distance: 16,
+  duration: 0.45,
+  wordDuration: 0.5,
+  stagger: 0.04,
+  amount: 0.12,
+  allowBlur: false,
+} as const
+
+export type MotionProfile = typeof DESKTOP_PROFILE | typeof MOBILE_PROFILE

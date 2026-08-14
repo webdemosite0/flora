@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { DESKTOP_PROFILE, MOBILE_PROFILE, type MotionProfile } from './motion'
 
 /** Matches a media query and stays in sync with it. */
 export function useMediaQuery(query: string) {
@@ -23,6 +24,11 @@ export const usePointerFine = () => useMediaQuery('(hover: hover) and (pointer: 
 export const useReducedMotion = () => useMediaQuery('(prefers-reduced-motion: reduce)')
 
 export const useIsMobile = () => useMediaQuery('(max-width: 767px)')
+
+/** Motion settings tuned for the current device. Desktop keeps its originals. */
+export function useMotionProfile(): MotionProfile {
+  return useIsMobile() ? MOBILE_PROFILE : DESKTOP_PROFILE
+}
 
 /** Freezes background scroll while an overlay is open, without layout shift. */
 export function useLockBodyScroll(locked: boolean) {

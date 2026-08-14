@@ -59,7 +59,8 @@ export function CoffeeOrigins() {
         <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Coffee-belt chart */}
           <div className="lg:col-span-7">
-            <div className="relative aspect-16/10 w-full rounded-xl border border-cream/12 bg-cream/4">
+            {/* Taller on phones so the pins have room to separate. */}
+            <div className="relative aspect-4/3 w-full rounded-xl border border-cream/12 bg-cream/4 sm:aspect-16/10">
               <svg
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
@@ -187,7 +188,9 @@ export function CoffeeOrigins() {
                     onClick={() => setActiveId(o.id)}
                     aria-pressed={selected}
                     aria-label={`${o.country}, ${o.region}`}
-                    className="group absolute -translate-x-1/2 -translate-y-1/2"
+                    /* A 44px touch target centred on the pin — the dot itself
+                       is far too small to hit with a thumb. */
+                    className="group absolute grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center"
                     style={{ left: `${projX(o.lng)}%`, top: `${projY(o.lat)}%` }}
                     initial={reduced ? false : { opacity: 0, scale: 0.4 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -220,11 +223,13 @@ export function CoffeeOrigins() {
                         }`}
                       />
                     </span>
+                    {/* On a phone five labels in this space collide into mush,
+                        so only the selected one is named. */}
                     <span
-                      className={`absolute top-6 left-1/2 -translate-x-1/2 text-[0.5rem] tracking-[0.16em] whitespace-nowrap uppercase transition-opacity duration-300 sm:text-[0.6rem] ${
+                      className={`absolute top-7 left-1/2 -translate-x-1/2 text-[0.5rem] tracking-[0.16em] whitespace-nowrap uppercase transition-opacity duration-300 sm:text-[0.6rem] ${
                         selected
                           ? 'text-cream opacity-100'
-                          : 'text-cream/50 opacity-70 group-hover:opacity-100'
+                          : 'text-cream/50 opacity-0 sm:opacity-70 sm:group-hover:opacity-100'
                       }`}
                     >
                       {o.country}
