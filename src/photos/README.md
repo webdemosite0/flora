@@ -14,17 +14,21 @@ looks half-finished while you shoot.
 
 ## Logo — do this one first
 
-| File             | Used where                                                  |
-| ---------------- | ----------------------------------------------------------- |
-| `logo.svg`       | Header once scrolled (sitting on cream). `.png` works too.   |
-| `logo-light.svg` | Header over the hero video, and the deep-green footer.       |
+| File             | Used where                                              | Status      |
+| ---------------- | ------------------------------------------------------- | ----------- |
+| `logo.jpg`       | Header and footer                                       | ✅ in place |
+| `logo-light.*`   | Header over the hero video, and the green footer         | optional    |
 
-`logo.svg` should be your **green mark on transparent** — the white box around
-it will fight the cream background. `logo-light.svg` should be the **white /
-knocked-out** version; without it the green mark disappears against the dark
-hero video and the footer.
+`logo.jpg` is your square badge, shown as a rounded tile. The site's `forest`
+colour is sampled from its background (`#074B36`), so the tile reads as a shape
+on the footer rather than a visible square.
 
-Until both exist the site uses a typographic FLORA / COFFEE lockup.
+`logo-light` is worth adding if you have a **white / knocked-out** version —
+over the dark hero video a green tile has less to push against. Drop it in and
+it is used automatically wherever the logo sits on a dark background.
+
+An `.svg` version of either would stay sharper on large screens; at 150×150 the
+current file is fine at the size it is displayed.
 
 ## Drinks
 

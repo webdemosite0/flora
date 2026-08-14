@@ -8,10 +8,12 @@
      Built from the logo: deep forest green on white, warmed with cream
      and a single terracotta accent. `forest` is the brand colour and does
      the work `forest` used to. */
-  --color-forest: #14503a;
-  --color-pine: #1c6449;
-  --color-fern: #357f5f;
-  --color-ink: #0b2e21;
+  /* `forest` is sampled straight from the logo's background, so the mark sits
+     on the footer and header as a shape rather than a visible square. */
+  --color-forest: #074b36;
+  --color-pine: #0f6046;
+  --color-fern: #2c7d5e;
+  --color-ink: #042b1f;
 
   --color-cream: #f7f2e7;
   --color-beige: #ece3d1;
